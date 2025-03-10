@@ -35,5 +35,11 @@ app.get("/api/healthcheck", (req, res) => {
   res.status(200).send({ message: "Server is running" });
 });
 
+// Error handling middleware
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).send({ message: "Internal Server Error" });
+});
+
 // Export app and server for Vercel
 export { app, server };
