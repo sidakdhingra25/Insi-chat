@@ -13,7 +13,6 @@ import { app, server } from "./lib/socket.js";
 
 dotenv.config();
 
-
 app.use(express.json());
 app.use(cookieParser());
 app.use(
@@ -22,7 +21,7 @@ app.use(
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"],
     credentials: true,
-  }),
+  })
 );
 
 connectDB();
@@ -37,8 +36,9 @@ app.get("/api/healthcheck", (req, res) => {
 
 // Error handling middleware
 app.use((err, req, res, next) => {
-  console.error(err.stack);
-  res.status(500).send({ message: "Internal Server Error" });
+  console.error("Error stack:", err.stack);
+  console.error("Error message:", err.message);
+  res.status(500).send({ message: "Internal server error" });
 });
 
 // Export app and server for Vercel
