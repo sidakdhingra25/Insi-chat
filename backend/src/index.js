@@ -18,8 +18,6 @@ app.use(cookieParser());
 app.use(
   cors({
     origin: "https://insi-chat.vercel.app",
-    methods: ["GET", "POST", "PUT", "DELETE"],
-    allowedHeaders: ["Content-Type", "Authorization"],
     credentials: true,
   })
 );
