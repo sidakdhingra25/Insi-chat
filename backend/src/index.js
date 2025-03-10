@@ -41,5 +41,5 @@ app.use((err, req, res, next) => {
   res.status(500).send({ message: "Internal server error" });
 });
 
-// Export app and server for Vercel
-export { app, server };
+// Export app as the default export for Vercel
+export default app;
