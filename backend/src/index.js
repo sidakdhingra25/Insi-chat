@@ -20,7 +20,7 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(
   cors({
-    origin: process.env.NODE_ENV === "development" ? "http://localhost:5173" : "https://insi-chat-backend.vercel.app",
+    origin: "https://insi-chat.vercel.app",
     credentials: true,
   })
 );
@@ -31,9 +31,13 @@ app.use("/api/messages", messageRoutes);
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "../../frontend/dist")));
 
-  app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "../../frontend", "dist", "index.html"));
-  });
+app.get('/api/healthcheck', (req, res) => {
+  res.status(200).send({ message: 'Server is running' });
+});
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, "../../frontend", "dist", "index.html"));
+});
 }
 
 server.listen(PORT, () => {
