@@ -28,8 +28,8 @@ export const signup = async (req, res) => {
     });
 
     if (newUser) {
-      generateToken(newUser._id, res);
       await newUser.save();
+      generateToken(newUser._id, res); // Ensure token is generated after saving the user
 
       res.status(201).json({
         _id: newUser._id,
@@ -60,7 +60,7 @@ export const login = async (req, res) => {
       return res.status(400).json({ message: "Invalid credentials" });
     }
 
-    generateToken(user._id, res);
+    generateToken(user._id, res); // Ensure token is generated after successful login
 
     res.status(200).json({
       _id: user._id,
