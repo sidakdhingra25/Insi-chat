@@ -29,7 +29,8 @@ export const signup = async (req, res) => {
 
     if (newUser) {
       await newUser.save();
-      generateToken(newUser._id, res); // Ensure token is generated after saving the user
+      const token = generateToken(newUser._id, res); // Ensure token is generated after saving the user
+      console.log("Generated token during signup:", token); // Add this line to log the token
 
       res.status(201).json({
         _id: newUser._id,
@@ -60,7 +61,8 @@ export const login = async (req, res) => {
       return res.status(400).json({ message: "Invalid credentials" });
     }
 
-    generateToken(user._id, res); // Ensure token is generated after successful login
+    const token = generateToken(user._id, res); // Ensure token is generated after successful login
+    console.log("Generated token during login:", token); // Add this line to log the token
 
     res.status(200).json({
       _id: user._id,
