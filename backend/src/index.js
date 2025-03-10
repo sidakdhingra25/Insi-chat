@@ -35,5 +35,5 @@ app.get("/api/healthcheck", (req, res) => {
   res.status(200).send({ message: "Server is running" });
 });
 
-// Export app for Vercel
-export default app;
+// Export app and server for Vercel
+export { app, server };
