@@ -18,12 +18,12 @@ const __dirname = path.resolve();
 
 app.use(express.json());
 app.use(cookieParser());
-app.use(
-  cors({
-    origin: "https://insi-chat.vercel.app",
-    credentials: true,
-  })
-);
+app.use(cors({
+  origin: 'https://insi-chat.vercel.app',
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true
+}));
 
 app.use("/api/auth", authRoutes);
 app.use("/api/messages", messageRoutes);
